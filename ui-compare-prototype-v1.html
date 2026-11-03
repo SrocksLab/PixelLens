@@ -1,0 +1,1370 @@
+<div id="ui-compare-prototype">
+  <style>
+    #ui-compare-prototype {
+      --uc-bg: light-dark(#eef1f3, #141719);
+      --uc-window: light-dark(#ffffff, #202427);
+      --uc-panel: light-dark(#f7f8f9, #272c30);
+      --uc-panel-strong: light-dark(#eceff1, #31373b);
+      --uc-text: light-dark(#1f2529, #f2f5f6);
+      --uc-muted: light-dark(#68737b, #aeb8be);
+      --uc-line: light-dark(#d7dde1, #3d454a);
+      --uc-accent: light-dark(#167c63, #45b999);
+      --uc-accent-soft: light-dark(#dff2ec, #193f36);
+      --uc-red: light-dark(#c93636, #ff6868);
+      --uc-red-soft: light-dark(rgba(201, 54, 54, 0.19), rgba(255, 104, 104, 0.22));
+      --uc-blue: light-dark(#286ca8, #6aaee8);
+      --uc-gold: light-dark(#9a6510, #e3ae50);
+      --uc-tech-blue: light-dark(rgba(53, 132, 190, 0.08), rgba(47, 132, 202, 0.16));
+      --uc-tech-blue-soft: light-dark(rgba(53, 132, 190, 0.03), rgba(24, 73, 117, 0.13));
+      --uc-shadow: 0 18px 52px light-dark(rgba(25, 35, 42, 0.18), rgba(0, 0, 0, 0.42));
+      color-scheme: light dark;
+      color: var(--uc-text);
+      font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      width: 100%;
+    }
+
+    #ui-compare-prototype * { box-sizing: border-box; }
+    #ui-compare-prototype button,
+    #ui-compare-prototype input { font: inherit; letter-spacing: 0; }
+
+    #ui-compare-prototype .uc-shell {
+      position: relative;
+      width: 100%;
+      height: max(640px, calc(100vh - 32px));
+      min-height: 640px;
+      overflow: hidden;
+      background: var(--uc-window);
+      border: 1px solid var(--uc-line);
+      border-radius: 8px;
+      box-shadow: var(--uc-shadow);
+    }
+
+    #ui-compare-prototype .uc-shell.tech-theme {
+      --uc-bg: #08152b;
+      --uc-window: rgba(9, 23, 48, 0.94);
+      --uc-panel: rgba(13, 30, 59, 0.9);
+      --uc-panel-strong: rgba(31, 61, 111, 0.78);
+      --uc-text: #f2f6ff;
+      --uc-muted: #91a4ca;
+      --uc-line: rgba(146, 177, 237, 0.28);
+      --uc-accent: #4d8cff;
+      --uc-accent-soft: rgba(61, 128, 255, 0.2);
+      --uc-red: #ff6673;
+      --uc-red-soft: rgba(255, 80, 94, 0.18);
+      --uc-blue: #74b0ff;
+      --uc-gold: #f5b84e;
+      --uc-tech-blue: rgba(54, 126, 255, 0.2);
+      --uc-tech-blue-soft: rgba(35, 77, 145, 0.2);
+      --uc-shadow: 0 22px 70px rgba(1, 8, 23, 0.58);
+      color-scheme: dark;
+      color: var(--uc-text);
+      background:
+        radial-gradient(circle at 78% 18%, rgba(62, 116, 255, 0.28) 0%, transparent 28%),
+        radial-gradient(circle at 18% 108%, rgba(46, 164, 255, 0.2) 0%, transparent 32%),
+        linear-gradient(135deg, #081329 0%, #0d1d3b 56%, #1c2858 100%);
+      border-color: rgba(146, 177, 237, 0.34);
+    }
+
+    #ui-compare-prototype .tech-theme .uc-titlebar,
+    #ui-compare-prototype .tech-theme .uc-sidebar,
+    #ui-compare-prototype .tech-theme .uc-capture-sidebar,
+    #ui-compare-prototype .tech-theme .uc-workbar,
+    #ui-compare-prototype .tech-theme .uc-controls {
+      background: rgba(8, 20, 43, 0.78);
+      backdrop-filter: blur(18px);
+    }
+    #ui-compare-prototype .tech-theme .uc-brand-mark {
+      background: linear-gradient(135deg, #4e8dff 0%, #6f6bff 100%);
+      box-shadow: 0 0 22px rgba(78, 141, 255, 0.45);
+    }
+    #ui-compare-prototype .tech-theme .uc-button {
+      background: rgba(19, 42, 80, 0.72);
+      border-color: rgba(143, 174, 235, 0.34);
+      color: var(--uc-text);
+    }
+    #ui-compare-prototype .tech-theme .uc-button:hover { background: rgba(42, 79, 139, 0.82); }
+    #ui-compare-prototype .tech-theme .uc-button.primary {
+      background: linear-gradient(135deg, #4d8cff 0%, #5bcbdb 100%);
+      border-color: rgba(132, 205, 255, 0.78);
+      color: #07142d;
+      box-shadow: 0 0 24px rgba(77, 140, 255, 0.34);
+    }
+    #ui-compare-prototype .tech-theme .uc-pages,
+    #ui-compare-prototype .tech-theme .uc-shot-list { scrollbar-color: rgba(112, 156, 231, 0.5) transparent; }
+    #ui-compare-prototype .tech-theme .uc-page.active,
+    #ui-compare-prototype .tech-theme .uc-shot.active {
+      background: linear-gradient(100deg, rgba(38, 103, 208, 0.4), rgba(36, 153, 170, 0.22));
+      box-shadow: inset 0 0 0 1px rgba(105, 176, 255, 0.22), 0 0 24px rgba(42, 113, 255, 0.12);
+    }
+    #ui-compare-prototype .tech-theme .uc-page:hover,
+    #ui-compare-prototype .tech-theme .uc-shot:hover { background: rgba(38, 76, 137, 0.52); }
+    #ui-compare-prototype .tech-theme .uc-page-icon,
+    #ui-compare-prototype .tech-theme .uc-thumb { border-color: rgba(143, 174, 235, 0.34); }
+    #ui-compare-prototype .tech-theme .uc-segments { background: rgba(22, 46, 87, 0.86); }
+    #ui-compare-prototype .tech-theme .uc-segment.active {
+      background: linear-gradient(135deg, rgba(67, 124, 236, 0.9), rgba(68, 92, 185, 0.9));
+      color: #ffffff;
+      box-shadow: 0 0 18px rgba(73, 132, 255, 0.28);
+    }
+    #ui-compare-prototype .tech-theme .uc-workspace {
+      background:
+        radial-gradient(ellipse at 54% 42%, rgba(52, 123, 255, 0.18) 0%, transparent 48%),
+        radial-gradient(ellipse at 94% 100%, rgba(99, 83, 222, 0.16) 0%, transparent 34%),
+        linear-gradient(135deg, #08162e 0%, #0c1c39 58%, #162650 100%);
+    }
+    #ui-compare-prototype .tech-theme .uc-stage {
+      background: radial-gradient(ellipse at 50% 48%, rgba(76, 132, 255, 0.1), transparent 52%);
+    }
+    #ui-compare-prototype .tech-theme .uc-canvas {
+      box-shadow: 0 0 0 1px rgba(132, 178, 255, 0.2), 0 24px 62px rgba(1, 8, 23, 0.54);
+    }
+    #ui-compare-prototype .tech-theme .uc-range { accent-color: #5ab9ff; }
+    #ui-compare-prototype .tech-theme .uc-dropzone,
+    #ui-compare-prototype .tech-theme .uc-modal,
+    #ui-compare-prototype .tech-theme .uc-capture-toolbar { background: rgba(10, 27, 57, 0.96); }
+    #ui-compare-prototype .tech-theme .uc-toast { background: #eaf3ff; color: #0a1b38; }
+
+    #ui-compare-prototype .uc-titlebar {
+      height: 56px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--uc-line);
+      background: var(--uc-window);
+    }
+
+    #ui-compare-prototype .uc-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 174px;
+      font-weight: 500;
+    }
+
+    #ui-compare-prototype .uc-brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--uc-accent);
+      color: light-dark(#ffffff, #10231e);
+    }
+
+    #ui-compare-prototype .uc-project {
+      display: none;
+    }
+
+    #ui-compare-prototype .uc-actions,
+    #ui-compare-prototype .uc-inline-actions,
+    #ui-compare-prototype .uc-segments,
+    #ui-compare-prototype .uc-control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #ui-compare-prototype .uc-actions { margin-left: auto; }
+    #ui-compare-prototype .uc-titlebar .uc-actions .uc-button { width: 136px; }
+
+    #ui-compare-prototype .uc-button {
+      min-height: 34px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: 1px solid var(--uc-line);
+      border-radius: 6px;
+      background: var(--uc-window);
+      color: var(--uc-text);
+      font-weight: 500;
+    }
+
+    #ui-compare-prototype .uc-button:hover { background: var(--uc-panel-strong); }
+    #ui-compare-prototype .uc-button.primary {
+      border-color: var(--uc-accent);
+      background: var(--uc-accent);
+      color: light-dark(#ffffff, #10231e);
+    }
+    #ui-compare-prototype .uc-button.primary:hover { filter: brightness(0.96); }
+    #ui-compare-prototype .uc-button.ghost { border-color: transparent; background: transparent; }
+    #ui-compare-prototype .uc-button.icon-only { width: 34px; padding: 0; }
+    #ui-compare-prototype .uc-button:disabled { opacity: 0.46; }
+    #ui-compare-prototype .uc-button svg { width: 16px; height: 16px; }
+
+    #ui-compare-prototype .uc-body {
+      height: calc(100% - 56px);
+      display: grid;
+      grid-template-columns: 218px minmax(0, 1fr) 228px;
+      min-width: 0;
+    }
+
+    #ui-compare-prototype .uc-sidebar {
+      min-width: 0;
+      border-right: 1px solid var(--uc-line);
+      background: var(--uc-panel);
+      display: flex;
+      flex-direction: column;
+    }
+
+    #ui-compare-prototype .uc-sidebar-head {
+      padding: 16px 14px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    #ui-compare-prototype .uc-section-title { font-weight: 500; }
+    #ui-compare-prototype .uc-count { color: var(--uc-muted); }
+
+    #ui-compare-prototype .uc-pages {
+      padding: 0 8px 12px;
+      display: grid;
+      gap: 3px;
+    }
+
+    #ui-compare-prototype .uc-page {
+      width: 100%;
+      min-height: 66px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--uc-text);
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) 12px;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 8px;
+      text-align: left;
+    }
+
+    #ui-compare-prototype .uc-page:hover { background: var(--uc-panel-strong); }
+    #ui-compare-prototype .uc-page.active { background: var(--uc-accent-soft); }
+    #ui-compare-prototype .uc-page-icon {
+      width: 72px;
+      height: 46px;
+      border-radius: 4px;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      background: #e7ecee;
+      border: 1px solid var(--uc-line);
+      color: var(--uc-muted);
+    }
+    #ui-compare-prototype .uc-page-icon::before,
+    #ui-compare-prototype .uc-thumb::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #2a3840 0 18%, #f6f8f8 18% 100%);
+    }
+    #ui-compare-prototype .uc-page-icon::after,
+    #ui-compare-prototype .uc-thumb::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 6px;
+      top: 13px;
+      height: 3px;
+      border-radius: 2px;
+      background: #d3dadd;
+      box-shadow: 0 8px 0 #d3dadd, 0 16px 0 #e0e5e7;
+    }
+    #ui-compare-prototype .uc-page-icon svg { display: none; }
+    #ui-compare-prototype .uc-page-copy { min-width: 0; }
+    #ui-compare-prototype .uc-page-name,
+    #ui-compare-prototype .uc-page-size {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #ui-compare-prototype .uc-page-size { color: var(--uc-muted); font-size: 12px; margin-top: 2px; }
+    #ui-compare-prototype .uc-status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--uc-line); }
+    #ui-compare-prototype .uc-status-dot.warn { background: var(--uc-gold); }
+    #ui-compare-prototype .uc-status-dot.ok { background: var(--uc-accent); }
+
+    #ui-compare-prototype .uc-capture-sidebar {
+      min-width: 0;
+      border-left: 1px solid var(--uc-line);
+      background: var(--uc-panel);
+      display: flex;
+      flex-direction: column;
+    }
+    #ui-compare-prototype .uc-capture-sidebar .uc-sidebar-head { padding-left: 14px; padding-right: 14px; }
+    #ui-compare-prototype .uc-shot-list { padding: 0 8px 12px; display: grid; gap: 3px; }
+    #ui-compare-prototype .uc-shot {
+      width: 100%;
+      min-height: 66px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--uc-text);
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) 12px;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 8px;
+      text-align: left;
+      cursor: default;
+    }
+    #ui-compare-prototype .uc-drag-handle { cursor: grab; }
+    #ui-compare-prototype .uc-drag-handle:active { cursor: grabbing; }
+    #ui-compare-prototype .uc-shot:hover { background: var(--uc-panel-strong); }
+    #ui-compare-prototype .uc-shot.active { background: var(--uc-accent-soft); }
+    #ui-compare-prototype .uc-shot.dragging { opacity: .45; }
+    #ui-compare-prototype .uc-shot.drop-before { box-shadow: inset 0 2px 0 var(--uc-accent); }
+    #ui-compare-prototype .uc-shot.drop-after { box-shadow: inset 0 -2px 0 var(--uc-accent); }
+    #ui-compare-prototype .uc-thumb {
+      width: 72px;
+      height: 46px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #e7ecee;
+      border: 1px solid var(--uc-line);
+    }
+    #ui-compare-prototype .uc-thumb.missing {
+      display: grid;
+      place-items: center;
+      border-style: dashed;
+      background: transparent;
+      color: var(--uc-muted);
+      font-size: 11px;
+    }
+    #ui-compare-prototype .uc-thumb.missing::before,
+    #ui-compare-prototype .uc-thumb.missing::after { display: none; }
+    #ui-compare-prototype .uc-shot-copy { min-width: 0; }
+    #ui-compare-prototype .uc-shot-name,
+    #ui-compare-prototype .uc-shot-meta {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #ui-compare-prototype .uc-shot-meta { color: var(--uc-muted); font-size: 12px; margin-top: 3px; }
+    #ui-compare-prototype .uc-drag-handle { color: var(--uc-muted); display: grid; place-items: center; font-size: 21px; line-height: 1; }
+    #ui-compare-prototype .uc-drag-handle svg { width: 18px; height: 18px; }
+    #ui-compare-prototype .uc-drag-glyph { display: block; transform: translateY(-1px); }
+    #ui-compare-prototype .uc-capture-sidebar .uc-count { display: grid; place-items: center; }
+    #ui-compare-prototype .uc-capture-sidebar .uc-count svg { width: 18px; height: 18px; }
+    #ui-compare-prototype .uc-workspace {
+      min-width: 0;
+      display: grid;
+      grid-template-rows: 58px minmax(0, 1fr) 64px;
+      background:
+        radial-gradient(ellipse at 58% 42%, var(--uc-tech-blue) 0%, transparent 58%),
+        linear-gradient(135deg, var(--uc-bg) 0%, var(--uc-tech-blue-soft) 100%);
+    }
+
+    #ui-compare-prototype .uc-workbar,
+    #ui-compare-prototype .uc-controls {
+      min-width: 0;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--uc-window);
+    }
+    #ui-compare-prototype .uc-workbar { border-bottom: 1px solid var(--uc-line); position: relative; }
+    #ui-compare-prototype .uc-workbar > .uc-segments {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+    }
+    #ui-compare-prototype .uc-controls { border-top: 1px solid var(--uc-line); justify-content: flex-start; }
+    #ui-compare-prototype .uc-page-heading { min-width: 150px; }
+    #ui-compare-prototype .uc-page-heading strong { display: block; font-weight: 500; }
+    #ui-compare-prototype .uc-page-heading span { color: var(--uc-muted); font-size: 12px; }
+
+    #ui-compare-prototype .uc-segments {
+      margin-left: auto;
+      padding: 3px;
+      border-radius: 6px;
+      background: var(--uc-panel-strong);
+    }
+    #ui-compare-prototype .uc-segment {
+      min-height: 30px;
+      padding: 0 11px;
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--uc-muted);
+    }
+    #ui-compare-prototype .uc-segment.active {
+      background: var(--uc-window);
+      color: var(--uc-text);
+      box-shadow: 0 1px 4px light-dark(rgba(25, 35, 42, 0.12), rgba(0, 0, 0, 0.28));
+    }
+
+    #ui-compare-prototype .uc-stage {
+      width: 100%;
+      min-width: 0;
+      min-height: 0;
+      padding: 18px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    #ui-compare-prototype .uc-canvas {
+      position: relative;
+      width: min(100%, 1080px);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #f4f6f7;
+      border: 1px solid var(--uc-line);
+      box-shadow: 0 10px 32px rgba(20, 28, 34, 0.14);
+      touch-action: none;
+    }
+
+    #ui-compare-prototype .uc-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: 0 0;
+      user-select: none;
+    }
+    #ui-compare-prototype .uc-layer.capture { touch-action: none; }
+
+    #ui-compare-prototype .uc-demo-app {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 18% 82%;
+      background: #f3f5f6;
+      color: #253038;
+      font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+    }
+    #ui-compare-prototype .uc-demo-side { background: #263139; color: #dce4e8; padding: 5.4% 9%; }
+    #ui-compare-prototype .uc-demo-logo { display: flex; align-items: center; gap: 7%; font-weight: 500; margin-bottom: 19%; }
+    #ui-compare-prototype .uc-demo-logo span:first-child { width: 20px; height: 20px; border-radius: 4px; background: #44ad8e; }
+    #ui-compare-prototype .uc-demo-nav { display: grid; gap: 7px; }
+    #ui-compare-prototype .uc-demo-nav span { padding: 7px 9px; border-radius: 4px; color: #adbac1; }
+    #ui-compare-prototype .uc-demo-nav span.active { background: #3a484f; color: #ffffff; }
+    #ui-compare-prototype .uc-demo-main { min-width: 0; display: grid; grid-template-rows: 13% 1fr; }
+    #ui-compare-prototype .uc-demo-top { background: #ffffff; border-bottom: 1px solid #dfe4e7; padding: 0 4%; display: flex; align-items: center; justify-content: space-between; }
+    #ui-compare-prototype .uc-demo-top strong { font-size: clamp(12px, 1.45vw, 18px); font-weight: 500; }
+    #ui-compare-prototype .uc-demo-user { width: 23px; height: 23px; border-radius: 50%; background: #dbe7e2; }
+    #ui-compare-prototype .uc-demo-content { padding: 3.3% 4%; min-width: 0; }
+    #ui-compare-prototype .uc-demo-tools { display: flex; align-items: center; gap: 8px; margin-bottom: 3%; }
+    #ui-compare-prototype .uc-demo-search { width: 31%; height: 28px; border: 1px solid #cdd5d9; border-radius: 4px; background: #ffffff; }
+    #ui-compare-prototype .uc-demo-filter { width: 12%; height: 28px; border: 1px solid #cdd5d9; border-radius: 4px; background: #ffffff; }
+    #ui-compare-prototype .uc-demo-create { margin-left: auto; height: 28px; padding: 0 12px; border: 0; border-radius: 4px; background: #167c63; color: #ffffff; }
+    #ui-compare-prototype .uc-demo-table { background: #ffffff; border: 1px solid #dce2e5; }
+    #ui-compare-prototype .uc-demo-row { min-height: 36px; display: grid; grid-template-columns: 1.2fr 1fr 0.8fr 0.7fr; align-items: center; gap: 10px; padding: 0 3%; border-bottom: 1px solid #e7ebed; font-size: clamp(8px, 1.08vw, 13px); }
+    #ui-compare-prototype .uc-demo-row.head { min-height: 32px; background: #f6f8f9; color: #6b777e; }
+    #ui-compare-prototype .uc-demo-row:last-child { border-bottom: 0; }
+    #ui-compare-prototype .uc-demo-state { color: #167c63; }
+    #ui-compare-prototype .uc-demo-state.wait { color: #a16b12; }
+    #ui-compare-prototype .capture .uc-demo-create { background: #286ca8; transform: translateX(-6px); }
+    #ui-compare-prototype .capture .uc-demo-search { width: 34%; }
+    #ui-compare-prototype .capture .uc-demo-row:nth-child(3) { transform: translateY(2px); }
+
+    #ui-compare-prototype .uc-diff-box {
+      position: absolute;
+      display: none;
+      border: 2px solid var(--uc-red);
+      background: var(--uc-red-soft);
+      pointer-events: none;
+    }
+    #ui-compare-prototype .uc-diff-box.one { left: 78%; top: 20.5%; width: 12%; height: 8%; }
+    #ui-compare-prototype .uc-diff-box.two { left: 22%; top: 20.5%; width: 25%; height: 8%; }
+    #ui-compare-prototype .uc-diff-box.three { left: 21%; top: 48%; width: 74%; height: 10%; }
+    #ui-compare-prototype .uc-canvas.diffing .uc-diff-box { display: block; }
+
+    #ui-compare-prototype .uc-control-group { min-width: 0; }
+    #ui-compare-prototype .uc-control-label { color: var(--uc-muted); white-space: nowrap; }
+    #ui-compare-prototype .uc-range { width: 112px; accent-color: var(--uc-accent); }
+    #ui-compare-prototype .uc-value { min-width: 38px; color: var(--uc-text); font-variant-numeric: tabular-nums; }
+    #ui-compare-prototype .uc-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: auto;
+      color: var(--uc-muted);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1360px) and (min-width: 721px) {
+      #ui-compare-prototype .uc-controls { padding: 0 10px; gap: 8px; }
+      #ui-compare-prototype .uc-controls .uc-control-group { gap: 5px; flex-shrink: 1; }
+      #ui-compare-prototype .uc-controls .uc-range { width: 76px; }
+      #ui-compare-prototype .uc-controls .uc-hint { gap: 5px; font-size: 12px; }
+      #ui-compare-prototype .uc-controls .uc-inline-actions { gap: 6px; flex-shrink: 0; }
+      #ui-compare-prototype .uc-controls .uc-inline-actions .uc-button { padding-left: 9px; padding-right: 9px; }
+      #ui-compare-prototype .uc-page-heading { min-width: 120px; }
+    }
+    #ui-compare-prototype .uc-align-icon {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      color: var(--uc-muted);
+    }
+    #ui-compare-prototype .uc-align-icon::before {
+      content: "↕";
+      position: absolute;
+      inset: -2px 0 0;
+      text-align: center;
+      font-size: 17px;
+      line-height: 18px;
+    }
+    #ui-compare-prototype .uc-align-icon::after {
+      content: "↔";
+      position: absolute;
+      inset: 0;
+      text-align: center;
+      font-size: 17px;
+      line-height: 18px;
+    }
+
+    #ui-compare-prototype .uc-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      background: rgba(7, 10, 12, 0.86);
+      display: none;
+    }
+    #ui-compare-prototype .uc-overlay.open { display: block; }
+
+    #ui-compare-prototype .uc-capture-toolbar {
+      position: absolute;
+      z-index: 5;
+      left: 16px;
+      right: 16px;
+      top: 14px;
+      min-height: 52px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 7px;
+      background: var(--uc-window);
+      color: var(--uc-text);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    }
+    #ui-compare-prototype .uc-capture-title { min-width: 170px; }
+    #ui-compare-prototype .uc-capture-title strong { display: block; font-weight: 500; }
+    #ui-compare-prototype .uc-capture-title span { display: block; margin-top: 2px; color: var(--uc-muted); font-size: 12px; }
+
+    #ui-compare-prototype .uc-desktop {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #56636a;
+      touch-action: none;
+      user-select: none;
+    }
+    #ui-compare-prototype .uc-desktop-grid {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px),
+        #56636a;
+      background-size: 36px 36px;
+    }
+    #ui-compare-prototype .uc-frozen-window {
+      position: absolute;
+      left: 8%;
+      top: 13%;
+      width: 84%;
+      height: 78%;
+      overflow: hidden;
+      border-radius: 6px;
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.3);
+      background: #ffffff;
+    }
+    #ui-compare-prototype .uc-frozen-window .uc-demo-app { inset: 28px 0 0; }
+    #ui-compare-prototype .uc-native-title {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 28px;
+      padding: 0 10px;
+      background: #ffffff;
+      color: #29343b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      border-bottom: 1px solid #dfe4e7;
+    }
+    #ui-compare-prototype .uc-window-detected {
+      position: absolute;
+      left: 8%;
+      top: 13%;
+      width: 84%;
+      height: 78%;
+      border: 2px solid var(--uc-blue);
+      pointer-events: none;
+    }
+    #ui-compare-prototype .uc-detected-label {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      height: 26px;
+      padding: 0 9px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      background: var(--uc-blue);
+      color: #ffffff;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    #ui-compare-prototype .uc-selection {
+      position: absolute;
+      z-index: 3;
+      left: 18%;
+      top: 20%;
+      width: 64%;
+      aspect-ratio: 16 / 9;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(0,0,0,.6);
+      touch-action: none;
+    }
+    #ui-compare-prototype .uc-selection.free-mode { border-style: solid; }
+    #ui-compare-prototype .uc-selection .uc-handle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid #ffffff;
+      border-radius: 2px;
+      background: var(--uc-blue);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.45);
+      display: none;
+      z-index: 2;
+    }
+    #ui-compare-prototype .uc-selection.free-mode .uc-handle { display: block; }
+    #ui-compare-prototype .uc-handle.nw { left: -6px; top: -6px; cursor: nwse-resize; }
+    #ui-compare-prototype .uc-handle.n { left: calc(50% - 5px); top: -6px; cursor: ns-resize; }
+    #ui-compare-prototype .uc-handle.ne { right: -6px; top: -6px; cursor: nesw-resize; }
+    #ui-compare-prototype .uc-handle.e { right: -6px; top: calc(50% - 5px); cursor: ew-resize; }
+    #ui-compare-prototype .uc-handle.se { right: -6px; bottom: -6px; cursor: nwse-resize; }
+    #ui-compare-prototype .uc-handle.s { left: calc(50% - 5px); bottom: -6px; cursor: ns-resize; }
+    #ui-compare-prototype .uc-handle.sw { left: -6px; bottom: -6px; cursor: nesw-resize; }
+    #ui-compare-prototype .uc-handle.w { left: -6px; top: calc(50% - 5px); cursor: ew-resize; }
+    #ui-compare-prototype .uc-selection::before,
+    #ui-compare-prototype .uc-selection::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,.72);
+      pointer-events: none;
+    }
+    #ui-compare-prototype .uc-selection::before { left: 33.33%; top: 0; bottom: 0; width: 1px; box-shadow: calc(var(--sel-width, 0px) / 3) 0 0 rgba(255,255,255,.72); }
+    #ui-compare-prototype .uc-selection::after { top: 33.33%; left: 0; right: 0; height: 1px; box-shadow: 0 calc(var(--sel-height, 0px) / 3) 0 rgba(255,255,255,.72); }
+    #ui-compare-prototype .uc-selection-size {
+      position: absolute;
+      left: 0;
+      bottom: -29px;
+      height: 25px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      background: rgba(10, 14, 16, 0.82);
+      color: #ffffff;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    #ui-compare-prototype .uc-modal-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(8, 11, 13, 0.58);
+    }
+    #ui-compare-prototype .uc-modal-wrap.open { display: grid; }
+    #ui-compare-prototype .uc-modal {
+      width: min(500px, 100%);
+      border-radius: 8px;
+      background: var(--uc-window);
+      color: var(--uc-text);
+      box-shadow: var(--uc-shadow);
+      overflow: hidden;
+    }
+    #ui-compare-prototype .uc-modal-head,
+    #ui-compare-prototype .uc-modal-foot {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    #ui-compare-prototype .uc-modal-head { border-bottom: 1px solid var(--uc-line); }
+    #ui-compare-prototype .uc-modal-foot { border-top: 1px solid var(--uc-line); justify-content: flex-end; }
+    #ui-compare-prototype .uc-modal-body { padding: 16px; }
+    #ui-compare-prototype .uc-dropzone {
+      min-height: 116px;
+      border: 1px dashed var(--uc-line);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--uc-muted);
+      background: var(--uc-panel);
+    }
+    #ui-compare-prototype .uc-dropzone svg { width: 24px; height: 24px; margin-bottom: 8px; }
+    #ui-compare-prototype .uc-file-list { margin-top: 12px; display: grid; gap: 6px; }
+    #ui-compare-prototype .uc-file-row { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 8px; color: var(--uc-muted); }
+    #ui-compare-prototype .uc-file-row svg { width: 15px; height: 15px; }
+    #ui-compare-prototype .uc-file-row span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--uc-text); }
+
+    #ui-compare-prototype .uc-toast {
+      position: absolute;
+      z-index: 50;
+      left: 50%;
+      top: 68px;
+      transform: translate(-50%, -10px);
+      padding: 9px 13px;
+      border-radius: 6px;
+      background: var(--uc-text);
+      color: var(--uc-window);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    #ui-compare-prototype .uc-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 720px) {
+      #ui-compare-prototype .uc-shell { height: 920px; }
+      #ui-compare-prototype .uc-titlebar { flex-wrap: wrap; height: auto; min-height: 88px; padding: 10px; }
+      #ui-compare-prototype .uc-project { order: 3; flex-basis: 100%; }
+      #ui-compare-prototype .uc-body { height: calc(100% - 88px); grid-template-columns: 1fr; grid-template-rows: 76px minmax(0, 1fr) auto; }
+      #ui-compare-prototype .uc-sidebar { border-right: 0; border-bottom: 1px solid var(--uc-line); }
+      #ui-compare-prototype .uc-sidebar > .uc-sidebar-head { display: none; }
+      #ui-compare-prototype .uc-pages { grid-auto-flow: column; grid-auto-columns: minmax(135px, 1fr); overflow-x: auto; padding: 8px; }
+      #ui-compare-prototype .uc-capture-sidebar { border-left: 0; border-top: 1px solid var(--uc-line); max-height: 222px; }
+      #ui-compare-prototype .uc-capture-sidebar .uc-sidebar-head { display: flex; padding: 9px 10px 6px; }
+      #ui-compare-prototype .uc-shot-list { grid-auto-flow: column; grid-auto-columns: minmax(190px, 1fr); overflow-x: auto; padding: 0 8px 8px; }
+      #ui-compare-prototype .uc-workspace { grid-template-rows: auto minmax(0, 1fr) auto; }
+      #ui-compare-prototype .uc-workbar,
+      #ui-compare-prototype .uc-controls { flex-wrap: wrap; padding: 9px 10px; }
+      #ui-compare-prototype .uc-segments { width: 100%; margin-left: 0; overflow-x: auto; }
+      #ui-compare-prototype .uc-workbar > .uc-segments { position: static; transform: none; }
+      #ui-compare-prototype .uc-controls { justify-content: flex-start; }
+      #ui-compare-prototype .uc-hint { width: 100%; margin-right: 0; }
+      #ui-compare-prototype .uc-controls .uc-inline-actions { width: 100%; }
+      #ui-compare-prototype .uc-controls .uc-inline-actions .uc-button { flex: 1; }
+      #ui-compare-prototype .uc-stage { padding: 10px; }
+      #ui-compare-prototype .uc-capture-toolbar { flex-wrap: wrap; }
+      #ui-compare-prototype .uc-capture-title { width: 100%; }
+      #ui-compare-prototype .uc-inline-actions { margin-left: auto; }
+    }
+  </style>
+
+  <section class="uc-shell tech-theme" aria-label="UI 走查桌面软件交互原型">
+    <header class="uc-titlebar">
+      <div class="uc-brand">
+        <span class="uc-brand-mark"><i data-lucide="scan-line" aria-hidden="true"></i></span>
+        <span>界面对比</span>
+      </div>
+      <div class="uc-actions">
+        <button class="uc-button cursor-interaction" type="button" id="ucImport">
+          <i data-lucide="images" aria-hidden="true"></i>导入设计稿
+        </button>
+        <button class="uc-button primary cursor-interaction" type="button" id="ucCapture">
+          <i data-lucide="scan" aria-hidden="true"></i>截屏
+        </button>
+      </div>
+    </header>
+
+    <div class="uc-body">
+      <aside class="uc-sidebar">
+        <div class="uc-sidebar-head">
+          <span class="uc-section-title">设计稿</span>
+          <span class="uc-count">4 张</span>
+        </div>
+        <div class="uc-pages" id="ucPages">
+          <button class="uc-page active cursor-interaction" type="button" data-page="订单列表" data-size="1920 × 1080">
+            <span class="uc-page-icon" aria-hidden="true"></span>
+            <span class="uc-page-copy"><span class="uc-page-name">订单列表</span><span class="uc-page-size">1920 × 1080 · 有差异</span></span>
+            <span class="uc-status-dot warn" data-tooltip="有差异" aria-label="有差异"></span>
+          </button>
+          <button class="uc-page cursor-interaction" type="button" data-page="订单详情" data-size="1920 × 1080">
+            <span class="uc-page-icon" aria-hidden="true"></span>
+            <span class="uc-page-copy"><span class="uc-page-name">订单详情</span><span class="uc-page-size">1920 × 1080 · 未截屏</span></span>
+            <span class="uc-status-dot" data-tooltip="未截屏" aria-label="未截屏"></span>
+          </button>
+          <button class="uc-page cursor-interaction" type="button" data-page="登录页" data-size="1280 × 720">
+            <span class="uc-page-icon" aria-hidden="true"></span>
+            <span class="uc-page-copy"><span class="uc-page-name">登录页</span><span class="uc-page-size">1280 × 720 · 已通过</span></span>
+            <span class="uc-status-dot ok" data-tooltip="已通过" aria-label="已通过"></span>
+          </button>
+          <button class="uc-page cursor-interaction" type="button" data-page="系统设置" data-size="1280 × 720">
+            <span class="uc-page-icon" aria-hidden="true"></span>
+            <span class="uc-page-copy"><span class="uc-page-name">系统设置</span><span class="uc-page-size">1280 × 720 · 未截屏</span></span>
+            <span class="uc-status-dot" data-tooltip="未截屏" aria-label="未截屏"></span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="uc-workspace">
+        <div class="uc-workbar">
+          <div class="uc-page-heading">
+            <strong id="ucPageTitle">订单列表</strong>
+            <span id="ucPageSize">设计稿 1920 × 1080</span>
+          </div>
+          <div class="uc-segments" role="tablist" aria-label="查看模式">
+            <button class="uc-segment cursor-interaction" type="button" data-view="design">设计稿</button>
+            <button class="uc-segment cursor-interaction" type="button" data-view="capture">截图</button>
+            <button class="uc-segment active cursor-interaction" type="button" data-view="overlay">叠加</button>
+            <button class="uc-segment cursor-interaction" type="button" data-view="diff">差异</button>
+          </div>
+        </div>
+
+        <div class="uc-stage">
+          <div class="uc-canvas" id="ucCanvas" aria-label="设计稿和测试截图对比画布">
+            <div class="uc-layer design" id="ucDesignLayer">
+              <div class="uc-demo-app">
+                <div class="uc-demo-side">
+                  <div class="uc-demo-logo"><span></span><span>订单中心</span></div>
+                  <div class="uc-demo-nav"><span>工作台</span><span class="active">订单管理</span><span>客户管理</span><span>系统设置</span></div>
+                </div>
+                <div class="uc-demo-main">
+                  <div class="uc-demo-top"><strong>订单管理</strong><span class="uc-demo-user"></span></div>
+                  <div class="uc-demo-content">
+                    <div class="uc-demo-tools"><span class="uc-demo-search"></span><span class="uc-demo-filter"></span><button class="uc-demo-create" type="button">新建订单</button></div>
+                    <div class="uc-demo-table">
+                      <div class="uc-demo-row head"><span>订单编号</span><span>客户</span><span>金额</span><span>状态</span></div>
+                      <div class="uc-demo-row"><span>SO-20261026-018</span><span>安澜科技</span><span>¥ 26,800</span><span class="uc-demo-state">已确认</span></div>
+                      <div class="uc-demo-row"><span>SO-20261026-017</span><span>星港供应链</span><span>¥ 18,240</span><span class="uc-demo-state wait">待审核</span></div>
+                      <div class="uc-demo-row"><span>SO-20261025-064</span><span>远帆制造</span><span>¥ 42,100</span><span class="uc-demo-state">已确认</span></div>
+                      <div class="uc-demo-row"><span>SO-20261025-052</span><span>启明零售</span><span>¥ 9,760</span><span class="uc-demo-state">已完成</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="uc-layer capture cursor-interaction" id="ucCaptureLayer" aria-label="可拖动的测试截图">
+              <div class="uc-demo-app">
+                <div class="uc-demo-side">
+                  <div class="uc-demo-logo"><span></span><span>订单中心</span></div>
+                  <div class="uc-demo-nav"><span>工作台</span><span class="active">订单管理</span><span>客户管理</span><span>系统设置</span></div>
+                </div>
+                <div class="uc-demo-main">
+                  <div class="uc-demo-top"><strong>订单管理</strong><span class="uc-demo-user"></span></div>
+                  <div class="uc-demo-content">
+                    <div class="uc-demo-tools"><span class="uc-demo-search"></span><span class="uc-demo-filter"></span><button class="uc-demo-create" type="button">新建订单</button></div>
+                    <div class="uc-demo-table">
+                      <div class="uc-demo-row head"><span>订单编号</span><span>客户</span><span>金额</span><span>状态</span></div>
+                      <div class="uc-demo-row"><span>SO-20261026-018</span><span>安澜科技</span><span>¥ 26,800</span><span class="uc-demo-state">已确认</span></div>
+                      <div class="uc-demo-row"><span>SO-20261026-017</span><span>星港供应链</span><span>¥ 18,240</span><span class="uc-demo-state wait">待审核</span></div>
+                      <div class="uc-demo-row"><span>SO-20261025-064</span><span>远帆制造</span><span>¥ 42,100</span><span class="uc-demo-state">已确认</span></div>
+                      <div class="uc-demo-row"><span>SO-20261025-052</span><span>启明零售</span><span>¥ 9,760</span><span class="uc-demo-state">已完成</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="uc-diff-box one"></span>
+            <span class="uc-diff-box two"></span>
+            <span class="uc-diff-box three"></span>
+          </div>
+        </div>
+
+        <div class="uc-controls">
+          <div class="uc-control-group">
+            <label class="uc-control-label" for="ucOpacity">截图透明度</label>
+            <input class="uc-range" id="ucOpacity" type="range" min="0" max="100" value="52">
+            <span class="uc-value" id="ucOpacityValue">52%</span>
+          </div>
+          <div class="uc-control-group">
+            <label class="uc-control-label" for="ucScale">截图缩放</label>
+            <input class="uc-range" id="ucScale" type="range" min="75" max="100" value="96">
+            <span class="uc-value" id="ucScaleValue">96%</span>
+          </div>
+          <span class="uc-hint" id="ucHint"><span class="uc-align-icon" aria-hidden="true"></span><span id="ucHintText">可拖动截图对齐设计稿</span></span>
+          <div class="uc-inline-actions">
+            <button class="uc-button cursor-interaction" type="button" id="ucReset"><i data-lucide="rotate-ccw" aria-hidden="true"></i>重置</button>
+            <button class="uc-button primary cursor-interaction" type="button" id="ucCompare" data-tooltip="需要先完成当前设计稿的截图"><i data-lucide="scan-search" aria-hidden="true"></i>开始对比</button>
+          </div>
+        </div>
+      </main>
+
+      <aside class="uc-capture-sidebar">
+        <div class="uc-sidebar-head">
+          <span class="uc-section-title">当前截图</span>
+          <span class="uc-count" data-tooltip="拖动右侧截图重新配对" aria-label="拖动右侧截图重新配对">⠿</span>
+        </div>
+        <div class="uc-shot-list" id="ucShotList">
+          <button class="uc-shot active cursor-interaction" type="button" draggable="false" data-shot="订单列表" data-time="10:32" data-page="订单列表">
+            <span class="uc-thumb" aria-hidden="true"></span>
+            <span class="uc-shot-copy"><span class="uc-shot-name" data-tooltip="订单列表-截图">订单列表-截图</span><span class="uc-shot-meta">10:32 · 1920 × 1080</span></span>
+            <span class="uc-drag-handle" draggable="true" aria-label="拖动排序" data-tooltip="拖动重新配对"><span class="uc-drag-glyph" aria-hidden="true">⠿</span></span>
+          </button>
+          <button class="uc-shot cursor-interaction" type="button" draggable="false" data-shot="未截取" data-time="" data-page="订单详情">
+            <span class="uc-thumb missing" aria-hidden="true">未截取</span>
+            <span class="uc-shot-copy"><span class="uc-shot-name">未截取</span><span class="uc-shot-meta">等待捕获 · 1920 × 1080</span></span>
+            <span class="uc-drag-handle" draggable="true" aria-label="拖动排序" data-tooltip="拖动重新配对"><span class="uc-drag-glyph" aria-hidden="true">⠿</span></span>
+          </button>
+          <button class="uc-shot cursor-interaction" type="button" draggable="false" data-shot="登录页" data-time="09:12" data-page="登录页">
+            <span class="uc-thumb" aria-hidden="true"></span>
+            <span class="uc-shot-copy"><span class="uc-shot-name">登录页-截图</span><span class="uc-shot-meta">09:12 · 1280 × 720</span></span>
+            <span class="uc-drag-handle" draggable="true" aria-label="拖动排序" data-tooltip="拖动重新配对"><span class="uc-drag-glyph" aria-hidden="true">⠿</span></span>
+          </button>
+          <button class="uc-shot cursor-interaction" type="button" draggable="false" data-shot="未截取" data-time="" data-page="系统设置">
+            <span class="uc-thumb missing" aria-hidden="true">未截取</span>
+            <span class="uc-shot-copy"><span class="uc-shot-name">未截取</span><span class="uc-shot-meta">等待捕获 · 1280 × 720</span></span>
+            <span class="uc-drag-handle" draggable="true" aria-label="拖动排序" data-tooltip="拖动重新配对"><span class="uc-drag-glyph" aria-hidden="true">⠿</span></span>
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="uc-overlay" id="ucCaptureOverlay" aria-hidden="true">
+      <div class="uc-desktop" id="ucDesktop">
+        <div class="uc-desktop-grid"></div>
+        <div class="uc-frozen-window" id="ucFrozenWindow">
+          <div class="uc-native-title"><span>订单管理客户端</span><span>—　□　×</span></div>
+          <div class="uc-demo-app">
+            <div class="uc-demo-side">
+              <div class="uc-demo-logo"><span></span><span>订单中心</span></div>
+              <div class="uc-demo-nav"><span>工作台</span><span class="active">订单管理</span><span>客户管理</span><span>系统设置</span></div>
+            </div>
+            <div class="uc-demo-main">
+              <div class="uc-demo-top"><strong>订单管理</strong><span class="uc-demo-user"></span></div>
+              <div class="uc-demo-content">
+                <div class="uc-demo-tools"><span class="uc-demo-search"></span><span class="uc-demo-filter"></span><button class="uc-demo-create" type="button">新建订单</button></div>
+                <div class="uc-demo-table">
+                  <div class="uc-demo-row head"><span>订单编号</span><span>客户</span><span>金额</span><span>状态</span></div>
+                  <div class="uc-demo-row"><span>SO-20261026-018</span><span>安澜科技</span><span>¥ 26,800</span><span class="uc-demo-state">已确认</span></div>
+                  <div class="uc-demo-row"><span>SO-20261026-017</span><span>星港供应链</span><span>¥ 18,240</span><span class="uc-demo-state wait">待审核</span></div>
+                  <div class="uc-demo-row"><span>SO-20261025-064</span><span>远帆制造</span><span>¥ 42,100</span><span class="uc-demo-state">已确认</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uc-window-detected" id="ucDetected"><span class="uc-detected-label">已识别：订单管理客户端窗口</span></div>
+        <div class="uc-selection cursor-interaction" id="ucSelection">
+          <span class="uc-handle nw" data-handle="nw"></span>
+          <span class="uc-handle n" data-handle="n"></span>
+          <span class="uc-handle ne" data-handle="ne"></span>
+          <span class="uc-handle e" data-handle="e"></span>
+          <span class="uc-handle se" data-handle="se"></span>
+          <span class="uc-handle s" data-handle="s"></span>
+          <span class="uc-handle sw" data-handle="sw"></span>
+          <span class="uc-handle w" data-handle="w"></span>
+          <span class="uc-selection-size" id="ucSelectionSize">1920 × 1080 · 固定尺寸</span>
+        </div>
+      </div>
+      <div class="uc-capture-toolbar">
+        <div class="uc-capture-title"><strong>画面已冻结</strong><span id="ucCaptureSubtitle">移动固定尺寸框，选择截图区域</span></div>
+        <div class="uc-segments" role="group" aria-label="截图方式">
+          <button class="uc-segment active cursor-interaction" type="button" data-capture-mode="fixed">按设计稿尺寸</button>
+          <button class="uc-segment cursor-interaction" type="button" data-capture-mode="free">自由框选</button>
+        </div>
+        <div class="uc-inline-actions" style="margin-left:auto">
+          <button class="uc-button cursor-interaction" type="button" id="ucCancelCapture">取消</button>
+          <button class="uc-button primary cursor-interaction" type="button" id="ucConfirmCapture">确认截取</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="uc-modal-wrap" id="ucImportModal" aria-hidden="true">
+      <section class="uc-modal" role="dialog" aria-modal="true" aria-labelledby="ucImportTitle">
+        <div class="uc-modal-head">
+          <strong id="ucImportTitle">导入设计稿</strong>
+          <button class="uc-button icon-only ghost cursor-interaction" type="button" id="ucCloseImport" aria-label="关闭"><i data-lucide="x" aria-hidden="true"></i></button>
+        </div>
+        <div class="uc-modal-body">
+          <div class="uc-dropzone">
+            <div><i data-lucide="folder-open" aria-hidden="true"></i><div>选择图片或整个设计稿文件夹</div></div>
+          </div>
+          <div class="uc-file-list">
+            <div class="uc-file-row"><i data-lucide="image" aria-hidden="true"></i><span>订单列表_1920x1080.png</span><span>1920 × 1080</span></div>
+            <div class="uc-file-row"><i data-lucide="image" aria-hidden="true"></i><span>订单详情_1920x1080.png</span><span>1920 × 1080</span></div>
+            <div class="uc-file-row"><i data-lucide="image" aria-hidden="true"></i><span>登录页_1280x720.png</span><span>1280 × 720</span></div>
+            <div class="uc-file-row"><i data-lucide="image" aria-hidden="true"></i><span>系统设置_1280x720.png</span><span>1280 × 720</span></div>
+          </div>
+        </div>
+        <div class="uc-modal-foot">
+          <button class="uc-button cursor-interaction" type="button" id="ucCancelImport">取消</button>
+          <button class="uc-button primary cursor-interaction" type="button" id="ucConfirmImport">导入 4 张设计稿</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="uc-toast" id="ucToast" aria-live="polite"></div>
+  </section>
+
+  <script>
+    (() => {
+      const root = document.getElementById('ui-compare-prototype');
+      if (!root) return;
+
+      const qs = (selector) => root.querySelector(selector);
+      const qsa = (selector) => Array.from(root.querySelectorAll(selector));
+      const canvas = qs('#ucCanvas');
+      const captureLayer = qs('#ucCaptureLayer');
+      const designLayer = qs('#ucDesignLayer');
+      const opacityInput = qs('#ucOpacity');
+      const scaleInput = qs('#ucScale');
+      const overlay = qs('#ucCaptureOverlay');
+      const desktop = qs('#ucDesktop');
+      const selection = qs('#ucSelection');
+      const selectionSize = qs('#ucSelectionSize');
+      const importModal = qs('#ucImportModal');
+      const toast = qs('#ucToast');
+
+      const saved = window.openai && window.openai.widgetState && window.openai.widgetState.privateContent;
+      const state = {
+        view: saved && saved.view ? saved.view : 'overlay',
+        opacity: saved && Number.isFinite(saved.opacity) ? saved.opacity : 52,
+        scale: saved && Number.isFinite(saved.scale) ? saved.scale : 96,
+        offsetX: saved && Number.isFinite(saved.offsetX) ? saved.offsetX : 8,
+        offsetY: saved && Number.isFinite(saved.offsetY) ? saved.offsetY : 5,
+        captureMode: 'fixed'
+      };
+
+      let saveTimer;
+      const saveState = () => {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(() => {
+          if (!window.openai || !window.openai.setWidgetState) return;
+          window.openai.setWidgetState({
+            modelContent: { selectedView: state.view, screenshotScale: state.scale },
+            privateContent: {
+              view: state.view,
+              opacity: state.opacity,
+              scale: state.scale,
+              offsetX: state.offsetX,
+              offsetY: state.offsetY
+            }
+          }).catch(() => {});
+        }, 120);
+      };
+
+      const showToast = (message) => {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(() => toast.classList.remove('show'), 1800);
+      };
+
+      const applyTransform = () => {
+        captureLayer.style.opacity = String(state.opacity / 100);
+        captureLayer.style.transform = `translate(${state.offsetX}px, ${state.offsetY}px) scale(${state.scale / 100})`;
+        qs('#ucOpacityValue').textContent = `${state.opacity}%`;
+        qs('#ucScaleValue').textContent = `${state.scale}%`;
+        opacityInput.value = String(state.opacity);
+        scaleInput.value = String(state.scale);
+      };
+
+      const setView = (view) => {
+        state.view = view;
+        qsa('[data-view]').forEach((button) => button.classList.toggle('active', button.dataset.view === view));
+        canvas.classList.toggle('diffing', view === 'diff');
+        designLayer.style.display = view === 'capture' ? 'none' : 'block';
+        captureLayer.style.display = view === 'design' ? 'none' : 'block';
+        if (view === 'design') {
+          captureLayer.style.pointerEvents = 'none';
+        } else {
+          captureLayer.style.pointerEvents = 'auto';
+        }
+        if (view === 'capture' || view === 'diff') captureLayer.style.opacity = '1';
+        else captureLayer.style.opacity = String(state.opacity / 100);
+        qs('#ucHintText').textContent = view === 'diff' ? '差异已直接标红' : '可拖动截图对齐设计稿';
+        saveState();
+      };
+
+      const syncShotSelection = (index) => {
+        qsa('.uc-shot').forEach((shot, shotIndex) => shot.classList.toggle('active', shotIndex === index));
+      };
+
+      const updateCompareAvailability = () => {
+        const activePageIndex = qsa('.uc-page').findIndex((page) => page.classList.contains('active'));
+        const activeShot = qs('.uc-shot.active');
+        const activeShotIndex = qsa('.uc-shot').indexOf(activeShot);
+        const canCompare = Boolean(activeShot && activeShot.dataset.shot !== '未截取' && activePageIndex === activeShotIndex);
+        const compareButton = qs('#ucCompare');
+        compareButton.disabled = !canCompare;
+        compareButton.setAttribute('aria-disabled', String(!canCompare));
+        compareButton.dataset.tooltip = canCompare ? '开始比对当前截图' : '请先截取当前页面';
+      };
+
+      qsa('[data-view]').forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
+
+      opacityInput.addEventListener('input', () => {
+        state.opacity = Number(opacityInput.value);
+        if (state.view !== 'overlay') setView('overlay');
+        applyTransform();
+        saveState();
+      });
+
+      scaleInput.addEventListener('input', () => {
+        state.scale = Number(scaleInput.value);
+        applyTransform();
+        saveState();
+      });
+
+      qs('#ucReset').addEventListener('click', () => {
+        state.opacity = 52;
+        state.scale = 100;
+        state.offsetX = 0;
+        state.offsetY = 0;
+        applyTransform();
+        setView('overlay');
+        showToast('截图位置和缩放已重置');
+      });
+
+      qs('#ucCompare').addEventListener('click', () => {
+        setView('diff');
+        showToast('对比完成，差异已标红');
+        qs('#ucPages .uc-page.active .uc-status-dot').className = 'uc-status-dot warn';
+      });
+
+      let layerDrag = null;
+      captureLayer.addEventListener('pointerdown', (event) => {
+        if (state.view === 'design' || state.view === 'diff') return;
+        layerDrag = { x: event.clientX, y: event.clientY, ox: state.offsetX, oy: state.offsetY };
+        captureLayer.setPointerCapture(event.pointerId);
+      });
+      captureLayer.addEventListener('pointermove', (event) => {
+        if (!layerDrag) return;
+        state.offsetX = Math.round(layerDrag.ox + event.clientX - layerDrag.x);
+        state.offsetY = Math.round(layerDrag.oy + event.clientY - layerDrag.y);
+        applyTransform();
+      });
+      const stopLayerDrag = () => { if (layerDrag) saveState(); layerDrag = null; };
+      captureLayer.addEventListener('pointerup', stopLayerDrag);
+      captureLayer.addEventListener('pointercancel', stopLayerDrag);
+
+      qsa('.uc-page').forEach((button) => button.addEventListener('click', () => {
+        const pageIndex = qsa('.uc-page').indexOf(button);
+        qsa('.uc-page').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        syncShotSelection(pageIndex);
+        updateCompareAvailability();
+        qs('#ucPageTitle').textContent = button.dataset.page;
+        qs('#ucPageSize').textContent = `设计稿 ${button.dataset.size}`;
+        selectionSize.textContent = `${button.dataset.size.replace(' × ', ' × ')} · 固定尺寸`;
+        setView('overlay');
+      }));
+
+      qsa('.uc-shot').forEach((shot) => shot.addEventListener('click', () => {
+        qsa('.uc-shot').forEach((item) => item.classList.remove('active'));
+        shot.classList.add('active');
+        updateCompareAvailability();
+        showToast(shot.dataset.shot === '未截取' ? '这一行还没有截图' : `已选择 ${shot.querySelector('.uc-shot-name').textContent}`);
+      }));
+
+      let draggedShot = null;
+      qsa('.uc-shot').forEach((shot) => {
+        const handle = shot.querySelector('.uc-drag-handle');
+        handle.addEventListener('dragstart', (event) => {
+          event.stopPropagation();
+          draggedShot = shot;
+          shot.classList.add('dragging');
+          event.dataTransfer.effectAllowed = 'move';
+          event.dataTransfer.setData('text/plain', shot.dataset.shot);
+        });
+        handle.addEventListener('dragend', () => {
+          shot.classList.remove('dragging');
+          qsa('.uc-shot').forEach((item) => item.classList.remove('drop-before', 'drop-after'));
+          draggedShot = null;
+        });
+        shot.addEventListener('dragover', (event) => {
+          event.preventDefault();
+          if (!draggedShot || draggedShot === shot) return;
+          const rect = shot.getBoundingClientRect();
+          qsa('.uc-shot').forEach((item) => item.classList.remove('drop-before', 'drop-after'));
+          shot.classList.add(event.clientY < rect.top + rect.height / 2 ? 'drop-before' : 'drop-after');
+          shot.parentElement.insertBefore(draggedShot, event.clientY < rect.top + rect.height / 2 ? shot : shot.nextSibling);
+        });
+        shot.addEventListener('drop', (event) => {
+          event.preventDefault();
+          if (!draggedShot) return;
+          showToast('截图顺序已调整');
+          updateCompareAvailability();
+          saveState();
+        });
+      });
+
+      const openImport = () => { importModal.classList.add('open'); importModal.setAttribute('aria-hidden', 'false'); };
+      const closeImport = () => { importModal.classList.remove('open'); importModal.setAttribute('aria-hidden', 'true'); };
+      qs('#ucImport').addEventListener('click', openImport);
+      qs('#ucCloseImport').addEventListener('click', closeImport);
+      qs('#ucCancelImport').addEventListener('click', closeImport);
+      qs('#ucConfirmImport').addEventListener('click', () => { closeImport(); showToast('已导入 4 张设计稿'); });
+
+      const openCapture = () => {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        state.captureMode = 'fixed';
+        selection.classList.remove('free-mode');
+        qsa('[data-capture-mode]').forEach((button) => button.classList.toggle('active', button.dataset.captureMode === 'fixed'));
+        selection.style.left = '18%';
+        selection.style.top = '20%';
+        selection.style.width = '64%';
+        selection.style.height = 'auto';
+        selection.style.aspectRatio = '16 / 9';
+        selectionSize.textContent = `${qs('.uc-page.active').dataset.size} · 固定尺寸`;
+        qs('#ucCaptureSubtitle').textContent = '移动固定尺寸框，选择截图区域';
+      };
+      const closeCapture = () => { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true'); };
+      qs('#ucCapture').addEventListener('click', openCapture);
+      qs('#ucCancelCapture').addEventListener('click', closeCapture);
+      qs('#ucConfirmCapture').addEventListener('click', () => {
+        closeCapture();
+        state.scale = 96;
+        state.opacity = 52;
+        state.offsetX = 8;
+        state.offsetY = 5;
+        const activePage = qs('.uc-page.active');
+        const activeShot = qs('.uc-shot.active');
+        if (activePage && activeShot && activeShot.dataset.shot === '未截取') {
+          const pageName = activePage.dataset.page;
+          activeShot.dataset.shot = pageName;
+          activeShot.dataset.time = '刚刚';
+          activeShot.querySelector('.uc-shot-name').textContent = `${pageName}-截图`;
+          activeShot.querySelector('.uc-shot-meta').textContent = `刚刚 · ${activePage.dataset.size}`;
+          activeShot.querySelector('.uc-thumb').classList.remove('missing');
+          activeShot.querySelector('.uc-thumb').textContent = '';
+          activePage.querySelector('.uc-page-size').textContent = `${activePage.dataset.size} · 有差异`;
+        }
+        applyTransform();
+        setView('overlay');
+        showToast('截图已保存，可以拖动和缩小校准');
+        qs('#ucPages .uc-page.active .uc-status-dot').className = 'uc-status-dot warn';
+        updateCompareAvailability();
+      });
+
+      qsa('[data-capture-mode]').forEach((button) => button.addEventListener('click', () => {
+        state.captureMode = button.dataset.captureMode;
+        qsa('[data-capture-mode]').forEach((item) => item.classList.toggle('active', item === button));
+        if (state.captureMode === 'fixed') {
+          selection.classList.remove('free-mode');
+          selection.style.left = '18%';
+          selection.style.top = '20%';
+          selection.style.width = '64%';
+          selection.style.height = 'auto';
+          selection.style.aspectRatio = '16 / 9';
+          selectionSize.textContent = `${qs('.uc-page.active').dataset.size} · 固定尺寸`;
+          qs('#ucCaptureSubtitle').textContent = '移动固定尺寸框，选择截图区域';
+        } else {
+          selection.classList.add('free-mode');
+          selection.style.left = '26%';
+          selection.style.top = '27%';
+          selection.style.width = '48%';
+          selection.style.height = '42%';
+          selection.style.aspectRatio = 'auto';
+          updateFreeSize();
+          qs('#ucCaptureSubtitle').textContent = '拖出区域后，可拖边缘或四角调整';
+        }
+      }));
+
+      const updateFreeSize = () => {
+        const rect = selection.getBoundingClientRect();
+        const base = desktop.getBoundingClientRect();
+        const simulatedWidth = Math.max(1, Math.round(rect.width / base.width * 1920));
+        const simulatedHeight = Math.max(1, Math.round(rect.height / base.height * 1080));
+        selectionSize.textContent = `${simulatedWidth} × ${simulatedHeight} · 自由区域`;
+      };
+
+      let selectionInteraction = null;
+      selection.addEventListener('pointerdown', (event) => {
+        event.stopPropagation();
+        const selRect = selection.getBoundingClientRect();
+        const deskRect = desktop.getBoundingClientRect();
+        const handle = event.target.closest('.uc-handle');
+        selectionInteraction = {
+          type: handle && state.captureMode === 'free' ? 'resize' : 'move',
+          handle: handle ? handle.dataset.handle : null,
+          id: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+          left: selRect.left - deskRect.left,
+          top: selRect.top - deskRect.top,
+          width: selRect.width,
+          height: selRect.height,
+          deskWidth: deskRect.width,
+          deskHeight: deskRect.height
+        };
+        selection.setPointerCapture(event.pointerId);
+      });
+      selection.addEventListener('pointermove', (event) => {
+        if (!selectionInteraction) return;
+        const dx = event.clientX - selectionInteraction.x;
+        const dy = event.clientY - selectionInteraction.y;
+        let left = selectionInteraction.left;
+        let top = selectionInteraction.top;
+        let width = selectionInteraction.width;
+        let height = selectionInteraction.height;
+        if (selectionInteraction.type === 'move') {
+          left += dx;
+          top += dy;
+        } else {
+          const handle = selectionInteraction.handle || '';
+          if (handle.includes('w')) { left += dx; width -= dx; }
+          if (handle.includes('e')) width += dx;
+          if (handle.includes('n')) { top += dy; height -= dy; }
+          if (handle.includes('s')) height += dy;
+          const minSize = 42;
+          if (width < minSize) { if (handle.includes('w')) left -= minSize - width; width = minSize; }
+          if (height < minSize) { if (handle.includes('n')) top -= minSize - height; height = minSize; }
+        }
+        left = Math.min(Math.max(0, left), selectionInteraction.deskWidth - width);
+        top = Math.min(Math.max(74, top), selectionInteraction.deskHeight - height);
+        width = Math.min(width, selectionInteraction.deskWidth - left);
+        height = Math.min(height, selectionInteraction.deskHeight - top);
+        selection.style.left = `${left}px`;
+        selection.style.top = `${top}px`;
+        selection.style.width = `${width}px`;
+        selection.style.height = `${height}px`;
+        selection.style.aspectRatio = 'auto';
+        if (state.captureMode === 'free') updateFreeSize();
+      });
+      selection.addEventListener('pointerup', () => { selectionInteraction = null; });
+      selection.addEventListener('pointercancel', () => { selectionInteraction = null; });
+
+      let freeStart = null;
+      desktop.addEventListener('pointerdown', (event) => {
+        if (state.captureMode !== 'free' || event.target.closest('.uc-capture-toolbar') || event.target.closest('#ucSelection')) return;
+        const rect = desktop.getBoundingClientRect();
+        freeStart = { x: event.clientX - rect.left, y: event.clientY - rect.top, rect };
+        selection.style.left = `${freeStart.x}px`;
+        selection.style.top = `${freeStart.y}px`;
+        selection.style.width = '1px';
+        selection.style.height = '1px';
+        desktop.setPointerCapture(event.pointerId);
+      });
+      desktop.addEventListener('pointermove', (event) => {
+        if (!freeStart) return;
+        const x = event.clientX - freeStart.rect.left;
+        const y = event.clientY - freeStart.rect.top;
+        const left = Math.min(freeStart.x, x);
+        const top = Math.min(freeStart.y, y);
+        const width = Math.max(1, Math.abs(x - freeStart.x));
+        const height = Math.max(1, Math.abs(y - freeStart.y));
+        selection.style.left = `${left}px`;
+        selection.style.top = `${top}px`;
+        selection.style.width = `${width}px`;
+        selection.style.height = `${height}px`;
+        updateFreeSize();
+      });
+      desktop.addEventListener('pointerup', () => { freeStart = null; updateFreeSize(); });
+      desktop.addEventListener('pointercancel', () => { freeStart = null; });
+
+      applyTransform();
+      setView(state.view);
+      updateCompareAvailability();
+    })();
+  </script>
+</div>

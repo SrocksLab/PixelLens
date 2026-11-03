@@ -1,0 +1,65 @@
+界面对比原型图标库规范
+建立日期：2026-10-30
+
+默认主库
+Microsoft Fluent UI System Icons，固定版本 @fluentui/svg-icons 1.1.344。
+本地目录：fluent-ui-1.1.344/
+预览入口：fluent-ui-1.1.344/index.html
+当前已收录 28 个原始 SVG：24 个常用 20 Regular，4 个窗口控制 16 Regular，并保存 LICENSE、NOTICE 和来源清单 manifest.json。
+下载包经过 npm 发布信息中的 SHA-512 完整性核对；每个图标另有 SHA-256 记录。
+
+后续原型使用规则
+1. 默认使用同一套 Regular 线性图标，常规尺寸 20px；小图标按需要补充同库的原生 16px 版本。
+2. 图标默认跟随文字颜色；普通、悬停、禁用、危险操作分别使用对应组件状态色。
+3. 品牌紫蓝青渐变用于主按钮或必要的强调；图标本身保持清晰、简洁，避免每个图标各用一种颜色。
+4. 用户指定的软件 Logo 保持独立，不替换成通用图标。
+5. 图标只表达对应动作，不引入新的功能或操作入口。
+6. 图标与按钮文字配套使用；仅图标按钮必须有可访问名称和含义提示。
+7. SVG 本地保存，后续原型优先内嵌或本地引用，不依赖在线 CDN 或图标字体账号。
+8. 分发图标资源时保留版权声明、LICENSE 与 NOTICE。
+9. 扩充时先从同库同风格查找；确需外部图标集时再记录来源和授权，保持视觉一致。
+
+常用语义
+导入设计稿：image_add
+导入截图：arrow_upload
+截图：screenshot 或 camera（同一原型中按入口含义固定）
+删除整组：delete
+拖动对齐：arrow_move
+截图行拖动手柄：re_order_dots_vertical
+交换配对：arrow_swap
+缩放：zoom_in、zoom_out
+缩放步进：add、subtract
+重置：arrow_reset
+确认：checkmark
+取消/关闭：dismiss
+叠加视图：square_multiple
+显示器：desktop
+
+已调研的其他来源
+iconfont：https://www.iconfont.cn/
+可查找特定图标集作为补充；不同素材按其对应授权判断，不统一视为可任意商用。
+官方帮助：https://www.iconfont.cn/help/detail?helptype=code
+法律声明：https://terms.alicdn.com/legal-agreement/terms/product/20220705100131999/20220705100131999.html
+
+Lucide：https://lucide.dev/
+另一套成熟的线性 SVG 图标库；整体采用 ISC，部分 Feather 衍生图标另保留 MIT 声明。作为备选，不在当前主库中混用。
+授权：https://lucide.dev/license
+
+主库来源
+https://github.com/microsoft/fluentui-system-icons
+https://github.com/microsoft/fluentui-system-icons/blob/main/LICENSE
+
+本次仅建立可复用素材库及规范，未替换 V0.0.5 等现有原型中的图标，也未修改桌面软件或安装包。
+
+
+2026-10-30 扩充：窗口控制
+窗口最小化：window_minimize（原始 subtract_16_regular）
+窗口最大化：window_maximize（原始 maximize_16_regular）
+窗口还原：window_restore（原始 square_multiple_16_regular）
+窗口关闭：window_close（原始 dismiss_16_regular）
+四个图标均来自已经固定版本的官方包，保留原始SVG，不以文字字符“─ □ ×”代替。
+原型窗口图标使用16px原生画布，按钮区域46px宽、随标题栏高度，图形水平垂直居中。
+关闭窗口悬停使用红色整块背景，普通窗口操作使用低强度浅色背景。
+此处的 Fluent SVG 是网页原型用图；正式WPF窗口优先沿用系统标题栏按钮或 Windows Chrome 图标语义。
+Microsoft 标题栏规范：https://learn.microsoft.com/en-us/windows/apps/design/basics/titlebar-design
+库扩充前的目录清单和预览保存在 fluent-ui-1.1.344/history/2026-10-30-before-window-controls/。

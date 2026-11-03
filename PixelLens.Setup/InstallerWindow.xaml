@@ -1,0 +1,24 @@
+<Window x:Class="PixelLens.Setup.InstallerWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="安装 PixelLens · 像素之眼" Icon="/PixelLens-Setup-v1.0.0;component/app.ico" Width="640" Height="520" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+ <Window.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries><ResourceDictionary Source="/PixelLens-Setup-v1.0.0;component/FlowTheme.xaml"/></ResourceDictionary.MergedDictionaries></ResourceDictionary></Window.Resources>
+ <Border x:Name="InstallerRoot" CornerRadius="10" Background="#080F1B" BorderBrush="#2B3B54" BorderThickness="1">
+  <Grid><Grid.RowDefinitions><RowDefinition Height="36"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+   <Grid MouseLeftButtonDown="Title_Down"><Button Content="×" Padding="0" FontSize="20" Width="32" Height="28" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0,4,6,0" Click="Close_Click"/></Grid>
+   <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="24,0,24,24">
+    <Border x:Name="InstallCard" Width="480" Background="#17243A" BorderBrush="#3F4E69" BorderThickness="1" CornerRadius="10" Padding="26" HorizontalAlignment="Center" VerticalAlignment="Center">
+     <StackPanel>
+      <StackPanel x:Name="BrandRow" Orientation="Horizontal" Margin="0,0,0,25"><Image Source="/PixelLens-Setup-v1.0.0;component/Assets/logo.png" Width="64" Height="64" Margin="0,0,16,0"/><StackPanel VerticalAlignment="Center"><TextBlock Text="PixelLens" FontFamily="Segoe UI" FontSize="24" FontWeight="SemiBold"/><TextBlock Text="像素之眼" FontSize="14" Foreground="#9DAEC8" Margin="0,5,0,0"/></StackPanel></StackPanel>
+      <TextBlock x:Name="StageTitle" FontSize="20" TextWrapping="Wrap" Margin="0,0,0,12"/>
+      <TextBlock x:Name="StageDetail" FontSize="13" Foreground="#A9BBD5" TextWrapping="Wrap" LineHeight="21" Margin="0,0,0,18"/>
+      <StackPanel x:Name="PathPanel"><TextBlock Text="安装位置" FontSize="12" Foreground="#BCCBE1" Margin="0,0,0,8"/><TextBox x:Name="InstallPath" Height="48" ToolTip="可直接修改安装路径"/></StackPanel>
+      <StackPanel x:Name="ProgressPanel" Visibility="Collapsed" Margin="0,6,0,0">
+       <Grid Height="7" Background="#2E3C54" ClipToBounds="True"><Border x:Name="ProgressFill" HorizontalAlignment="Left" Background="{StaticResource FlowAccent}" Width="0"/></Grid><TextBlock x:Name="ProgressPercent" Text="0%" FontSize="12" Foreground="#91A5C5" Margin="0,12,0,0"/>
+      </StackPanel>
+      <Path x:Name="SuccessMark" Data="M1 12 L9 20 L26 2" Width="30" Height="26" Stretch="Uniform" Stroke="#7EE0C2" StrokeThickness="3" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,0,0,12"/>
+      <UniformGrid Columns="2" Margin="0,28,0,0"><Button x:Name="SecondaryButton" Content="取消" Height="42" Margin="0,0,6,0" Click="Secondary_Click"/><Button x:Name="PrimaryButton" Content="开始安装" Height="42" Margin="6,0,0,0" Style="{StaticResource FlowPrimary}" Click="Primary_Click"/></UniformGrid>
+     </StackPanel>
+    </Border>
+   </ScrollViewer>
+  </Grid>
+ </Border>
+</Window>

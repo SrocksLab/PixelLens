@@ -1,0 +1,220 @@
+{
+  "library": "Fluent UI System Icons",
+  "package": "@fluentui/svg-icons",
+  "version": "1.1.344",
+  "license": "MIT",
+  "licenseUrl": "https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/LICENSE",
+  "source": "https://github.com/microsoft/fluentui-system-icons",
+  "packageUrl": "https://registry.npmjs.org/@fluentui/svg-icons/-/svg-icons-1.1.344.tgz",
+  "packageIntegrity": "sha512-rasjaq4hBXzRS25pSY9gaqwY7NdvZJCz7G/rtpwF6mCmg2R+9TnySLhHbR+sOpkMP/IDDG28XvxRcNEQ/lJYoQ==",
+  "downloaded": "2026-10-30",
+  "variant": "Regular: 20px application icons; 16px window controls",
+  "icons": [
+    {
+      "key": "add",
+      "label": "添加",
+      "file": "add.svg",
+      "originalFile": "package/icons/add_20_regular.svg",
+      "sha256": "eace2d0d89e66e50d5c93cf82d21eb9e73a452dc370a76846d1f1802788dd71c"
+    },
+    {
+      "key": "subtract",
+      "label": "缩小 / 减少",
+      "file": "subtract.svg",
+      "originalFile": "package/icons/subtract_20_regular.svg",
+      "sha256": "a724aae5ef54510875cf0b1dda4b49e6bb39dcb9f44dad450cdb1f64d5feb85b"
+    },
+    {
+      "key": "image_add",
+      "label": "导入设计稿",
+      "file": "image_add.svg",
+      "originalFile": "package/icons/image_add_20_regular.svg",
+      "sha256": "fc3ee6a22b0518363f0ebde430e91abe0e4943f1ab96ec022a7facdc4d896c00"
+    },
+    {
+      "key": "image_multiple",
+      "label": "多张图片",
+      "file": "image_multiple.svg",
+      "originalFile": "package/icons/image_multiple_20_regular.svg",
+      "sha256": "06fc8b24272932fe1312a44ef615bc39881e21f0c81a04264809d6465adf4b63"
+    },
+    {
+      "key": "camera",
+      "label": "截屏入口",
+      "file": "camera.svg",
+      "originalFile": "package/icons/camera_20_regular.svg",
+      "sha256": "84cad97118cea3155040ca0f3d55e005ab424943a3a55cac139401f53a68b5c5"
+    },
+    {
+      "key": "screenshot",
+      "label": "截屏",
+      "file": "screenshot.svg",
+      "originalFile": "package/icons/screenshot_20_regular.svg",
+      "sha256": "7f7349b4bbf3f5e48579c6609f24b879ea0c14f4bf0c0f9143235563d83d20c7"
+    },
+    {
+      "key": "crop",
+      "label": "自由框选 / 裁剪",
+      "file": "crop.svg",
+      "originalFile": "package/icons/crop_20_regular.svg",
+      "sha256": "cafa1d622e2bed53b0575e12de26e5dc7a48bc68717a55758c854b16d7fbb86c"
+    },
+    {
+      "key": "delete",
+      "label": "删除整组",
+      "file": "delete.svg",
+      "originalFile": "package/icons/delete_20_regular.svg",
+      "sha256": "117dd937dfea155b95a157489089b658bb0611c736cbad4e5339c8470d5a3b93"
+    },
+    {
+      "key": "arrow_move",
+      "label": "拖动对齐",
+      "file": "arrow_move.svg",
+      "originalFile": "package/icons/arrow_move_20_regular.svg",
+      "sha256": "caa70b9bc1b6024912725adb1178e93816903bf5fa0082278184482ec8f351fd"
+    },
+    {
+      "key": "re_order_dots_vertical",
+      "label": "截图拖动手柄",
+      "file": "re_order_dots_vertical.svg",
+      "originalFile": "package/icons/re_order_dots_vertical_20_regular.svg",
+      "sha256": "484b67cd255240f47d709da58fbb87b5093880bd72ac794cb36abb2ce675388c"
+    },
+    {
+      "key": "arrow_reset",
+      "label": "重置",
+      "file": "arrow_reset.svg",
+      "originalFile": "package/icons/arrow_reset_20_regular.svg",
+      "sha256": "0b1fff894154d44bdf4a6e2645f3a2dfa9d1389ff8b1deb8f973095fe37532a1"
+    },
+    {
+      "key": "zoom_in",
+      "label": "放大",
+      "file": "zoom_in.svg",
+      "originalFile": "package/icons/zoom_in_20_regular.svg",
+      "sha256": "f0537c07123efdd648ee92dc62774f57dcfc807c7874b6e00ead5c2e0d696cb9"
+    },
+    {
+      "key": "zoom_out",
+      "label": "缩小",
+      "file": "zoom_out.svg",
+      "originalFile": "package/icons/zoom_out_20_regular.svg",
+      "sha256": "cae3867fffcc639d19366d1811aeb9ed097731962afe8ea6170aba03bebeea2c"
+    },
+    {
+      "key": "checkmark",
+      "label": "确认",
+      "file": "checkmark.svg",
+      "originalFile": "package/icons/checkmark_20_regular.svg",
+      "sha256": "9ad90a13e5d3dd6309544d09a14817b7e609015db6e6c60ecd44ef120d2b3470"
+    },
+    {
+      "key": "dismiss",
+      "label": "取消 / 关闭",
+      "file": "dismiss.svg",
+      "originalFile": "package/icons/dismiss_20_regular.svg",
+      "sha256": "3d95fdce4bb3a29b983377648e5528d73d965ed90409bce5fa096ef790b75ccb"
+    },
+    {
+      "key": "arrow_sync",
+      "label": "重新处理",
+      "file": "arrow_sync.svg",
+      "originalFile": "package/icons/arrow_sync_20_regular.svg",
+      "sha256": "563a1dd29e26075d3ffc349bacdf56a58d86842373a045a753ba1e1973205813"
+    },
+    {
+      "key": "error_circle",
+      "label": "错误提示",
+      "file": "error_circle.svg",
+      "originalFile": "package/icons/error_circle_20_regular.svg",
+      "sha256": "b8b8592507222ba2800175ed42ce276ae08a15f177b3fee297f1ced60de40b07"
+    },
+    {
+      "key": "info",
+      "label": "说明提示",
+      "file": "info.svg",
+      "originalFile": "package/icons/info_20_regular.svg",
+      "sha256": "b2171313057fcd3cffca9c20cf905a05977e63eebe5275bab4371b1f0d4a1ff8"
+    },
+    {
+      "key": "arrow_upload",
+      "label": "导入 / 上传",
+      "file": "arrow_upload.svg",
+      "originalFile": "package/icons/arrow_upload_20_regular.svg",
+      "sha256": "b8d4b2688a3c6c299c4ee0f8b2408a7c9e28d4bfb9adeb9b289954e842e42fd3"
+    },
+    {
+      "key": "folder_open",
+      "label": "本地文件夹",
+      "file": "folder_open.svg",
+      "originalFile": "package/icons/folder_open_20_regular.svg",
+      "sha256": "ed56c692301eba6af0415171afdd55ff11577206e739b2887f60047935ff5a6a"
+    },
+    {
+      "key": "desktop",
+      "label": "显示器",
+      "file": "desktop.svg",
+      "originalFile": "package/icons/desktop_20_regular.svg",
+      "sha256": "941d16c07f8f5468d0e2461710b7806affd20e6604f9be15374548370bcdd9e1"
+    },
+    {
+      "key": "arrow_swap",
+      "label": "交换配对",
+      "file": "arrow_swap.svg",
+      "originalFile": "package/icons/arrow_swap_20_regular.svg",
+      "sha256": "e7e6de1e4d107a047e20cb8952d048643cb954ea7fe4e55d556ea894387eafd2"
+    },
+    {
+      "key": "square_multiple",
+      "label": "叠加视图",
+      "file": "square_multiple.svg",
+      "originalFile": "package/icons/square_multiple_20_regular.svg",
+      "sha256": "de601d733420494510b8129cc413f76463435f7366a727faefde9b9e9a457a9f"
+    },
+    {
+      "key": "image_search",
+      "label": "图片对比",
+      "file": "image_search.svg",
+      "originalFile": "package/icons/image_search_20_regular.svg",
+      "sha256": "2fe4cb8f47966648f42bddc4fefa7cad19a57fe0d7ce063c10aba7880e6f7ed0"
+    },
+    {
+      "key": "window_minimize",
+      "label": "最小化窗口",
+      "file": "window_minimize.svg",
+      "originalFile": "package/icons/subtract_16_regular.svg",
+      "nativeSize": 16,
+      "variant": "16 Regular",
+      "sha256": "70e6ea1034de2462d670562e50d108a8ba9e26f110a22858cca03b866989147a"
+    },
+    {
+      "key": "window_maximize",
+      "label": "最大化窗口",
+      "file": "window_maximize.svg",
+      "originalFile": "package/icons/maximize_16_regular.svg",
+      "nativeSize": 16,
+      "variant": "16 Regular",
+      "sha256": "8683cfebf398f30c0ba5cdc00e9b8b352abbf65c8dbb3065e291e54e9b07bf70"
+    },
+    {
+      "key": "window_restore",
+      "label": "还原窗口",
+      "file": "window_restore.svg",
+      "originalFile": "package/icons/square_multiple_16_regular.svg",
+      "nativeSize": 16,
+      "variant": "16 Regular",
+      "sha256": "c68af854de3e03434db96581aa2516dc2b747af7d6a59b8d77cd410954941908"
+    },
+    {
+      "key": "window_close",
+      "label": "关闭窗口",
+      "file": "window_close.svg",
+      "originalFile": "package/icons/dismiss_16_regular.svg",
+      "nativeSize": 16,
+      "variant": "16 Regular",
+      "sha256": "16ad1ebc24e77252d69c5b2a8c036ce428621d4045cc3ac64599267c604dd0c6"
+    }
+  ],
+  "expanded": "2026-10-30",
+  "revision": 2
+}

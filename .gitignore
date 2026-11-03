@@ -1,0 +1,42 @@
+# Build and IDE files
+**/bin/
+**/obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local releases, tools, verification and legacy installer payload
+/output/
+/tmp/
+/dist/
+/dist-wpf/
+/dist-installer/
+/UICompare.Wpf/Installer/payload/
+/UICompare.Wpf/Installer/UICompare-Setup.sed
+
+# Python prototype
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key
+*.pem
+.aws/
+.codex/
+.agents/
+/用户需求与沟通规范.md
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
